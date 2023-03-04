@@ -40,7 +40,7 @@ def exe_summary(input_data):
 def summarize(summarizer, parser, originals, corpus):
   summarizer.stop_words = [' ']  # スペースも1単語として認識されるため、ストップワードにすることで除外する
   result = summarizer(document=parser.document, sentences_count=sentences)
-  st.write(corpus)
+  # st.write(corpus) 要約エラー時の検証用コードのため、デプロイ時は不要
   for sentence in result:
     st.write(originals[corpus.index(sentence.__str__())])
    
@@ -49,7 +49,7 @@ st.title('文章要約アプリ')
 
 # ファイル選択
 st.write("### 要約ファイル選択")
-uploaded_file = st.file_uploader("テキストファイルをアップロードしてください。", ["txt"])
+uploaded_file = st.file_uploader("テキストファイルをアップロードしてください。※注意：テキスト内にアルファベットが含まれるとうまく要約できないことがあります。", ["txt"])
 
 if uploaded_file is not None:
   content = uploaded_file.read()
