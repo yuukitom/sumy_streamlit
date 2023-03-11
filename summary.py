@@ -10,7 +10,9 @@ from sumy.summarizers.sum_basic import SumBasicSummarizer
 from sumy.summarizers.kl import KLSummarizer
 
 # 変数定義
-nlp = spacy.load("ja_ginza_electra")
+if not "nlp" in st.sesstion_state:
+  st.session_state.nlp = spacy.load("ja_ginza_electra")
+nlp = st.session_state.nlp
 parser = None
 input_data = None
 
